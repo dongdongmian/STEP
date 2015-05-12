@@ -1,0 +1,138 @@
+[非终结符]
+S'
+
+Statement
+Type
+List_id
+Type_v
+Assignment
+ArithExpre
+LogicExpre
+Logic_judge
+A
+T
+F
+IF
+While
+Print 
+String 
+B
+Note
+C
+
+
+[终结符]
+or
+float 
+int
+string 
+id 
+, 
+simi
+int_v 
+float_v 
+= 
+string_v
+>  
+less  
+l_equal  
+>=   
+==  
+!=  
+&&  
+or
+( 
+) 
++ 
+- 
+* 
+/
+{ 
+} 
+if 
+else
+while
+print
+note
+
+[文法起始符]
+S
+
+[生成式]
+S => S';
+
+S' => Statement;
+S' => Assignment;
+S' => LogicExpre;
+S' => ArithExpre;
+S' => IF;
+S' => While;
+S' => Print;
+S' => Note;
+
+S' => Statement S';
+S' => Assignment S';
+S' => LogicExpre S';
+S' => ArithExpre S';
+S' => IF S';
+S' => While S';
+S' => Print S';
+S' => Note S';
+
+Statement => Type List_id simi;
+
+Type => int;
+Type => float;
+Type => string;
+
+List_id => id , List_id;
+List_id => id;
+List_id => id = ArithExpre;
+List_id => id = ArithExpre , List_id;
+List_id => id = string_v , List_id;
+List_id => id = string_v;
+
+Assignment => id = Type_v simi;
+Assignment => id = ArithExpre simi;
+
+LogicExpre => LogicExpre && C;
+LogicExpre => LogicExpre or C;
+LogicExpre => C;
+C => ( LogicExpre ); 
+C => A Logic_judge A;
+
+A => id;
+A => int_v;
+A => float_v;
+
+Logic_judge => >;
+Logic_judge => less;
+Logic_judge => >=;
+Logic_judge => l_equal;
+Logic_judge => ==;
+Logic_judge => !=;
+
+ArithExpre => ArithExpre + T;
+ArithExpre => ArithExpre - T;
+ArithExpre => T;
+T => T * F;
+T => T / F;
+T => F;
+F => ( ArithExpre );
+F => A;
+
+IF => if ( LogicExpre ) { S' };
+IF => if ( LogicExpre ) { S' } else { S' };
+
+While => while ( LogicExpre ) { S' };
+
+Print => print String simi;
+
+B => id;
+B => string_v;
+B => Type_v;
+
+String => B + String;
+String => B;
+
+Note => note string_v;
